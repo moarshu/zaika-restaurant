@@ -3,22 +3,42 @@
 <head>
     <title>Checkout - Zaika Dhaba</title>
     <link rel="stylesheet" href="/static/style.css">
+    <script>
+        function calculateTotal() {
+            let price = parseInt(document.getElementById("price").value);
+            let qty = parseInt(document.getElementById("quantity").value);
+            let total = price * qty;
+            document.getElementById("total").innerText = total;
+        }
+    </script>
 </head>
-<body>
+<body class="home-bg">
 
 <div class="overlay">
     <h2>Checkout</h2>
 
+    <div class="menu-card">
+        <h3 id="itemName">{{ item }}</h3>
+        <p>Price: ₹{{ price }}</p>
+        <p>Total: ₹<span id="total">{{ price }}</span></p>
+    </div>
+
     <form action="/order" method="POST">
+        <input type="hidden" name="item" value="{{ item }}">
+        <input type="hidden" name="price" id="price" value="{{ price }}">
+
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="text" name="phone" placeholder="Phone Number" required>
-        <input type="text" name="item" placeholder="Food Item" required>
-        <input type="number" name="quantity" placeholder="Quantity" required>
-        <textarea name="address" placeholder="Delivery Address"></textarea>
+
+        <input type="number" name="quantity" id="quantity" value="1" min="1"
+               onchange="calculateTotal()" required>
+
+        <textarea name="address" placeholder="Delivery Address" required></textarea>
+
         <button type="submit">Confirm Order</button>
     </form>
 
-    <a href="/" class="btn">Back to Home</a>
+    <a href="/" class="btn">Back</a>
 </div>
 
 </body>
