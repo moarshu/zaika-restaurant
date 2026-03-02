@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+header {
+    background: #d4af37;
+    padding: 20px;
+    color: black;
+}
+
+.menu-section {
+    padding: 40px;
+}
+
+.card {
+    background: #222;
+    padding: 20px;
+    margin: 15px auto;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.order-section {
+    padding: 40px;
+    background: #1a1a1a;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    margin: auto;
+    gap: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    background: #d4af37;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+footer {
+    padding: 20px;
+    background: black;
+      }
