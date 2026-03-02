@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout - Zaika Dhaba</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="overlay">
+    <h2>Checkout</h2>
+
+    <form action="/order" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="item" placeholder="Food Item" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <textarea name="address" placeholder="Delivery Address"></textarea>
+        <button type="submit">Confirm Order</button>
+    </form>
+
+    <a href="/" class="btn">Back to Home</a>
+</div>
+
+</body>
+</html>
