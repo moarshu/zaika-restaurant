@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request
+import os
 import smtplib
 from email.mime.text import MIMEText
-import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
 @app.route('/veg')
 def veg():
     return render_template('veg.html')
@@ -16,51 +17,57 @@ def veg():
 def nonveg():
     return render_template('nonveg.html')
 
-@app.route('/checkout')
+@app.route('/checkout', methods=['POST'])
 def checkout():
-    item = request.args.get('item')
-    price = request.args.get('price')
-    return render_template('checkout.html', item=item, price=price)
-    
-@app.route('/checkout')
-def checkout():
-    return render_template('checkout.html')
+    item = request.form['item']
+    price = int(request.form['price'])
+    quantity = int(request.form['quantity'])
+    total = price * quantity
+
+    return render_template(
+        'checkout.html',
+        item=item,
+        price=price,
+        quantity=quantity,
+        total=total
+    )
 
 @app.route('/order', methods=['POST'])
 def order():
     name = request.form['name']
     phone = request.form['phone']
+    address = request.form['address']
     item = request.form['item']
     quantity = request.form['quantity']
-    address = request.form['address']
+    total = request.form['total']
 
     message = f"""
-    New Order from Zaika Dhaba Website
+    New Order Received
 
-    Name: {name}
-    Phone: {phone}
     Item: {item}
     Quantity: {quantity}
+    Total: ₹{total}
+
+    Customer: {name}
+    Phone: {phone}
     Address: {address}
     """
 
     sender = os.environ.get("EMAIL_USER")
     password = os.environ.get("EMAIL_PASS")
-    receiver = "restaurantowner@gmail.com"
 
     msg = MIMEText(message)
     msg['Subject'] = "New Order - Zaika Dhaba"
     msg['From'] = sender
-    msg['To'] = receiver
+    msg['To'] = sender
 
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.login(sender, password)
-    server.sendmail(sender, receiver, msg.as_string())
+    server.sendmail(sender, sender, msg.as_string())
     server.quit()
 
-    return "Order Sent Successfully!"
+    return "<h2>Order Placed Successfully!</h2>"
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
