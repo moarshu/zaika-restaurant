@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zaika Dhaba & Family Restaurant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Zaika Dhaba & Family Restaurant</h1>
+    <p>Authentic North Indian & South Indian Taste</p>
+</header>
+
+<section class="menu-section">
+    <h2>Veg Menu</h2>
+
+    <div class="card">
+        <h3>Shahi Paneer</h3>
+        <p>₹300 / ₹180</p>
+    </div>
+
+    <div class="card">
+        <h3>Butter Masala Dosa</h3>
+        <p>₹120 / ₹140</p>
+    </div>
+
+    <div class="card">
+        <h3>Mushroom Masala</h3>
+        <p>₹400 / ₹200</p>
+    </div>
+</section>
+
+<section class="menu-section">
+    <h2>Non-Veg Menu</h2>
+
+    <div class="card">
+        <h3>Chicken 65</h3>
+        <p>₹500 / ₹300</p>
+    </div>
+
+    <div class="card">
+        <h3>Mutton Korma</h3>
+        <p>₹700 / ₹400</p>
+    </div>
+
+    <div class="card">
+        <h3>Chicken Manchurian</h3>
+        <p>₹500 / ₹300</p>
+    </div>
+</section>
+
+<section class="order-section">
+    <h2>Place Your Order</h2>
+    <form action="/order" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="text" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="item" placeholder="Food Item" required>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <textarea name="address" placeholder="Delivery Address"></textarea>
+        <button type="submit">Order Now</button>
+    </form>
+</section>
+
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>📍 Varanasi Rd, Sarsena Khalsa, Azamgarh</p>
+    <p>📞 07081354980</p>
+    <p>🕒 7:00 AM – 12:00 AM</p>
+</section>
+
+<footer>
+    <p>© 2026 Zaika Dhaba</p>
+</footer>
+
+</body>
+  </html>
