@@ -76,7 +76,8 @@ Address: {address}
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)    name = request.form.get("name")
+    app.run(host="0.0.0.0", port=port)
+    name = request.form.get("name")
     phone = request.form.get("phone")
     address = request.form.get("address")
     item = request.form.get("item")
@@ -112,7 +113,8 @@ Address: {address}
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)    name = request.form['name']
+    app.run(host="0.0.0.0", port=port)
+    name = request.form['name']
     phone = request.form['phone']
     address = request.form['address']
     item = request.form['item']
