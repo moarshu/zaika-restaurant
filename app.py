@@ -8,6 +8,17 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('index.html')
+@app.route('/veg')
+def veg():
+    return render_template('veg.html')
+
+@app.route('/nonveg')
+def nonveg():
+    return render_template('nonveg.html')
+    
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
 
 @app.route('/order', methods=['POST'])
 def order():
