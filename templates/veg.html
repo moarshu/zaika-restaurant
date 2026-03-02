@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Veg Menu</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h2 class="page-title">Veg Menu</h2>
+
+<div class="menu-grid">
+
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1604908177522-4026e7a19d4b">
+        <h3>Shahi Paneer</h3>
+        <p>₹300</p>
+
+        <form action="/checkout" method="POST">
+            <input type="hidden" name="item" value="Shahi Paneer">
+            <input type="hidden" name="price" value="300">
+
+            <div class="qty-box">
+                <button type="button" onclick="decrease(this)">-</button>
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="button" onclick="increase(this)">+</button>
+            </div>
+
+            <button type="submit" class="add-btn">Add to Cart</button>
+        </form>
+    </div>
+
+</div>
+
+<a href="/" class="back-btn">Back</a>
+
+<script>
+function increase(btn){
+    let input = btn.parentElement.querySelector("input");
+    input.value = parseInt(input.value) + 1;
+}
+function decrease(btn){
+    let input = btn.parentElement.querySelector("input");
+    if(input.value > 1){
+        input.value = parseInt(input.value) - 1;
+    }
+}
+</script>
+
+</body>
+                  </html>
