@@ -15,6 +15,12 @@ def veg():
 @app.route('/nonveg')
 def nonveg():
     return render_template('nonveg.html')
+
+@app.route('/checkout')
+def checkout():
+    item = request.args.get('item')
+    price = request.args.get('price')
+    return render_template('checkout.html', item=item, price=price)
     
 @app.route('/checkout')
 def checkout():
