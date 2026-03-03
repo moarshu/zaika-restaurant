@@ -35,8 +35,12 @@ def checkout():
         if not item or not price or not quantity:
             return redirect(url_for('home'))
 
-        price = int(price)
-        quantity = int(quantity)
+        try:
+            price = int(price)
+            quantity = int(quantity)
+        except:
+            return redirect(url_for('home'))
+
         total = price * quantity
 
         return render_template(
@@ -50,20 +54,27 @@ def checkout():
     return redirect(url_for('home'))
 
 
-# ---------------- ORDER & EMAIL ----------------
+# ---------------- ORDER + EMAIL ----------------
 @app.route('/order', methods=['POST'])
 def order():
-    name = request.form.get('name')
-    phone = request.form.get('phone')
-    address = request.form.get('address')
-    item = request.form.get('item')
-    quantity = request.form.get('quantity')
-    total = request.form.get('total')
+    try:
+        name = request.form.get('name')
+        phone = request.form.get('phone')
+        address = request.form.get('address')
+        item = request.form.get('item')
+        quantity = request.form.get('quantity')
+        total = request.form.get('total')
 
-    if not name or not phone or not address:
-        return "<h3>Missing customer details</h3>"
+        if not name or not phone or not address:
+            return "<h3>Customer details missing</h3>"
 
-    message = f"""
+        sender = os.environ.get("EMAIL_USER")
+        password = os.environ.get("EMAIL_PASS")
+
+        if not sender or not password:
+            return "<h3>Email credentials not configured in Render</h3>"
+
+        message = f"""
 New Order Received
 
 Item: {item}
@@ -75,13 +86,6 @@ Phone: {phone}
 Address: {address}
 """
 
-    sender = os.environ.get("EMAIL_USER")
-    password = os.environ.get("EMAIL_PASS")
-
-    if not sender or not password:
-        return "<h3>Email credentials not configured</h3>"
-
-    try:
         msg = MIMEText(message)
         msg['Subject'] = "New Order - Zaika Dhaba"
         msg['From'] = sender
@@ -95,7 +99,7 @@ Address: {address}
         return "<h2>Order Placed Successfully! Email Sent ✅</h2>"
 
     except Exception as e:
-        return f"<h3>Email Error: {str(e)}</h3>"
+        return f"<h3>Server Error: {str(e)}</h3>"
 
 
 # ---------------- RUN APP ----------------
